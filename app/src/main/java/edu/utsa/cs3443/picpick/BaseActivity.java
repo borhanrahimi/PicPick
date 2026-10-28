@@ -90,6 +90,19 @@ public abstract class BaseActivity extends AppCompatActivity {
                     Toast.makeText(this, R.string.reset_done, Toast.LENGTH_SHORT).show();
                 }).show();
     }
+    protected void confirmRemove(String path, Runnable onRemoved) {
+        edu.utsa.cs3443.picpick.model.Photo photo = PhotoManager.getPhotoByPath(path);
+        if (photo == null || !path.startsWith("imports/")) return;
+        new com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+                .setTitle(R.string.remove_photo_title)
+                .setMessage(getString(R.string.remove_photo_message, photo.getLabel()))
+                .setNegativeButton(android.R.string.cancel, null)
+                .setPositiveButton(R.string.remove_copy, (dialog, which) -> {
+                    if (PhotoManager.removeImported(this, path)) {
+                        Toast.makeText(this, R.string.copy_removed, Toast.LENGTH_SHORT).show(); onRemoved.run();
+                    } else Toast.makeText(this, R.string.remove_failed, Toast.LENGTH_LONG).show();
+                }).show();
+    }
     protected void shareCsv() {
         try {
             File dir = new File(getCacheDir(), "exports");

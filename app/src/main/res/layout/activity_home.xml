@@ -8,9 +8,11 @@
                 <com.google.android.material.button.MaterialButton android:id="@+id/btnImport" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/import_photos" style="@style/ActionButton" app:icon="@drawable/ic_add" android:layout_marginTop="12dp" />
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingHorizontal="20dp" android:layout_weight="1">
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:text="@string/swipe_hint" style="@style/BodyText" android:paddingBottom="8dp" />
                 <TextView android:id="@+id/reviewProgress" android:layout_width="match_parent" android:layout_height="wrap_content" style="@style/BodyText" android:accessibilityLiveRegion="polite" />
                 <ProgressBar android:id="@+id/reviewProgressBar" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="8dp" android:layout_marginTop="8dp" android:progressTint="@color/brand" />
-                <FrameLayout android:id="@+id/imageContainer" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:minHeight="260dp" android:layout_marginTop="16dp" android:background="@drawable/bg_photo_card" android:clipToOutline="true" android:padding="8dp">
+                <FrameLayout android:id="@+id/imageContainer" android:layout_width="match_parent" android:layout_height="@dimen/review_photo_height" android:layout_marginTop="16dp" android:background="@drawable/bg_photo_card" android:clipToOutline="true" android:padding="8dp">
                     <ImageView android:id="@+id/imageViewMain" android:layout_width="match_parent" android:layout_height="match_parent" android:scaleType="fitCenter" />
                     <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:gravity="center" android:padding="16dp">
                         <TextView android:id="@+id/reviewEmpty" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="22sp" android:gravity="center" android:textColor="@color/ink" android:accessibilityLiveRegion="polite" />

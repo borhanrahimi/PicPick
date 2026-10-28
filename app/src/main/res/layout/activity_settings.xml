@@ -18,10 +18,43 @@
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/samples_hint" style="@style/BodyText" />
             <com.google.android.material.button.MaterialButton android:id="@+id/btnImport" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/import_photos" style="@style/ActionButton" app:icon="@drawable/ic_add" android:layout_marginTop="12dp" />
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/import_hint" style="@style/BodyText" />
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/storage_title"
+                style="@style/SectionTitle" android:layout_marginTop="24dp" />
+            <TextView android:id="@+id/storageSummary" android:layout_width="match_parent" android:layout_height="wrap_content"
+                style="@style/BodyText" android:layout_marginTop="12dp" />
+            <com.google.android.material.button.MaterialButton android:id="@+id/btnManageStorage" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:text="@string/manage_copies" style="@style/ActionButton" />
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/storage_hint" style="@style/BodyText" />
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/data_controls" style="@style/SectionTitle" android:layout_marginTop="24dp" />
             <com.google.android.material.button.MaterialButton android:id="@+id/btnExport" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/share_csv" style="@style/ActionButton" android:layout_marginTop="12dp" />
             <com.google.android.material.button.MaterialButton android:id="@+id/btnReset" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/reset_confirm" style="@style/ActionButton" />
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/privacy_hint" style="@style/BodyText" android:layout_marginTop="16dp" android:background="@drawable/bg_soft" android:padding="20dp" />
+            <com.google.android.material.button.MaterialButton android:id="@+id/btnWalkthrough" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:text="@string/show_walkthrough" style="@style/ActionButton" android:layout_marginTop="24dp" />
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="@string/credits_title" style="@style/SectionTitle" android:layout_marginTop="24dp" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:padding="20dp" android:layout_marginTop="12dp"
+                android:background="@drawable/bg_photo_card">
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:text="@string/credits_description" style="@style/BodyText" android:layout_marginBottom="8dp" />
+                <TextView android:id="@+id/credit_borhan" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:minHeight="48dp" android:gravity="center_vertical"
+                    android:text="@string/credit_borhan" android:textSize="16sp" android:textColor="@color/ink"
+                    android:textColorLink="@color/brand" />
+                <TextView android:id="@+id/credit_nadibur" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:minHeight="48dp" android:gravity="center_vertical"
+                    android:text="@string/credit_nadibur" android:textSize="16sp" android:textColor="@color/ink"
+                    android:textColorLink="@color/brand" />
+                <TextView android:id="@+id/credit_simon" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:minHeight="48dp" android:gravity="center_vertical"
+                    android:text="@string/credit_simon" android:textSize="16sp" android:textColor="@color/ink"
+                    android:textColorLink="@color/brand" />
+                <TextView android:id="@+id/credit_levi" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:minHeight="48dp" android:gravity="center_vertical"
+                    android:text="@string/credit_levi" android:textSize="16sp" android:textColor="@color/ink"
+                    android:textColorLink="@color/brand" />
+            </LinearLayout>
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/about_app" style="@style/BodyText" android:layout_marginTop="24dp" android:gravity="center" />
         </LinearLayout>
     </ScrollView>

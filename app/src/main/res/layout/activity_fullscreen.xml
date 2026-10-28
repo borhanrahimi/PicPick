@@ -1,5 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/canvas" android:orientation="vertical">
     <com.google.android.material.button.MaterialButton android:id="@+id/btnBack" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/back" app:icon="@drawable/ic_back" style="@style/Widget.Material3.Button.TextButton" />
-    <ImageView android:id="@+id/fullImageView" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:scaleType="fitCenter" android:contentDescription="@string/fullscreen_photo" />
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingHorizontal="20dp"
+        android:paddingBottom="12dp" android:text="@string/zoom_hint" style="@style/BodyText" />
+    <edu.utsa.cs3443.picpick.ZoomImageView android:id="@+id/fullImageView" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:scaleType="fitCenter" android:contentDescription="@string/fullscreen_photo" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:padding="12dp">
+        <com.google.android.material.button.MaterialButton android:id="@+id/btnResetZoom" android:layout_width="0dp"
+            android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/reset_zoom" style="@style/ActionButton" />
+        <com.google.android.material.button.MaterialButton android:id="@+id/btnRemoveCopy" android:layout_width="0dp"
+            android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/remove_copy" style="@style/Widget.Material3.Button.TextButton" />
+    </LinearLayout>
 </LinearLayout>

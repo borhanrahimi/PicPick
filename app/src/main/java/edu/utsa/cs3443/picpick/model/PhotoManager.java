@@ -121,6 +121,27 @@ public final class PhotoManager {
         c.getSharedPreferences("settings", Context.MODE_PRIVATE).edit().putBoolean("samples", show).apply();
         persist(c);
     }
+    public static long importedBytes(Context c) {
+        long total = 0;
+        for (Photo p : photos.values()) if (p.getFilePath().startsWith("imports/")) total += new File(c.getFilesDir(), p.getFilePath()).length();
+        return total;
+    }
+    public static int importedCount() {
+        int count = 0;
+        for (Photo p : photos.values()) if (p.getFilePath().startsWith("imports/")) count++;
+        return count;
+    }
+    public static boolean removeImported(Context c, String path) {
+        Photo photo = photos.get(path);
+        if (photo == null || !path.matches("imports/[a-f0-9]{64}")) return false;
+        File file = new File(c.getFilesDir(), path);
+        if (file.exists() && !file.delete()) return false;
+        photos.remove(path);
+        history.removeIf(change -> change.path.equals(path));
+        prefs(c).edit().remove(path).apply();
+        persist(c);
+        return true;
+    }
     public static boolean showsSamples() { return samples; }
     public static void saveStatuses(Context c) {
         SharedPreferences.Editor editor = prefs(c).edit();

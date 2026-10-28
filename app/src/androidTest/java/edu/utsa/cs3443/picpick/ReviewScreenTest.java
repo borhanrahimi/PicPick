@@ -21,6 +21,7 @@ public class ReviewScreenTest {
     @Before public void prepare() {
         context = InstrumentationRegistry.getInstrumentation().getTargetContext();
         InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> {
+            context.getSharedPreferences("settings", Context.MODE_PRIVATE).edit().putBoolean("onboarding_complete", true).apply();
             PhotoManager.loadPhotos(context);
             PhotoManager.setSamples(context, true);
             PhotoManager.resetAll(context);

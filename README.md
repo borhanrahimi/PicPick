@@ -1,138 +1,132 @@
 # PicPick
 
-**Less clutter. More moments worth keeping.**
+### Make room for the moments you love.
 
-PicPick is a native Android photo organizer built with Java and Material 3. Import photos, review them one at a time, and choose **Keep**, **Trash**, or **Skip**. Your originals stay untouched.
+PicPick is a native Android photo organizer that turns a crowded photo collection into a simple decision: **Keep, Trash, or Skip**. Import selected photos, review them at your own pace, and find your choices in organized folders.
 
-## What's inside
+**Your originals stay untouched.** PicPick works with private copies, and Trash marks a photo rather than deleting it from your phone.
 
-- **Your photos:** select up to 30 images per import through Android's photo picker (or its document-picker fallback).
-- **A calmer review flow:** rounded photo cards, progress tracking, completion states, and explicit review of skipped photos.
-- **Multi-step undo:** restore up to 100 recent decisions, including after rotation or reopening the app.
-- **Gallery and folders:** responsive photo grids, category counts, empty states, and fullscreen previews.
-- **Settings:** light, dark, or device appearance; sample-photo visibility; import; CSV sharing; and confirmed reset.
-- **Private storage:** selected images are copied into app-private storage. No account, server, broad library permission, or network permission is required.
-- **Shareable reports:** export filenames and sorting choices through the Android share sheet.
+**Android 8.0+ · Java · Material 3 · Light & dark themes · No account required**
 
-Trash is a classification, not file deletion. PicPick does not remove originals from your phone.
+[See the app](#screenshots) · [Explore features](#features) · [Run locally](#run-locally) · [Meet the team](#credits)
 
-## Try the app
+## Screenshots
 
-### On an Android device
+Real screenshots captured from PicPick 1.2 running on an Android 15 / API 35 emulator with the bundled sample library.
 
-Build the debug APK and install it on a connected Android phone or emulator:
+| Review | Search & filter | Organized folders |
+|:---:|:---:|:---:|
+| <img src="docs/screenshots/review.png" width="240" alt="PicPick review screen showing a sample photo, progress, and Trash, Skip, Undo, and Keep actions"> | <img src="docs/screenshots/gallery.png" width="240" alt="Gallery with name search, status filters, source selection, and a photo grid"> | <img src="docs/screenshots/folders.png" width="240" alt="Collection summary with Keep, Trash, and Skip folders"> |
+
+| Settings | Team credits | Dark appearance |
+|:---:|:---:|:---:|
+| <img src="docs/screenshots/settings.png" width="240" alt="Settings with appearance choices, sample controls, import, and storage management"> | <img src="docs/screenshots/credits.png" width="240" alt="Built together credits listing all four contributors with LinkedIn links"> | <img src="docs/screenshots/review-dark.png" width="240" alt="PicPick photo review screen in dark mode"> |
+
+## Why PicPick?
+
+Reviewing photos is easier when you can focus on one image instead of an entire camera roll. PicPick provides a repeatable flow for keeping favorites, setting unwanted images aside, and returning to uncertain choices later—with undo available when you change your mind.
+
+The app includes nine sample images so you can explore it before importing anything personal.
+
+## Features
+
+| Feature | What you can do |
+|---|---|
+| **Photo import** | Choose up to 30 images per import through Android's picker. Identical file contents are detected as duplicates. |
+| **Quick review** | Swipe right to Keep, left to Trash, or use the labeled buttons. Skip photos to revisit later. |
+| **Photo inspection** | Tap a review photo to open the viewer. Pinch to zoom, drag to pan, and double-tap to zoom or reset. |
+| **Multi-step undo** | Restore up to 100 recent decisions, including after restarting the app. |
+| **Search & filters** | Find photos by name and filter by sorting status or imported/sample source. |
+| **Folders & progress** | See collection counts, review progress, and clear completion states. |
+| **Storage controls** | See imported-copy storage usage. Long-press an imported photo or use its viewer to remove its app copy after confirmation. |
+| **Personal settings** | Choose light, dark, or device appearance; hide sample photos; and replay the welcome guide. |
+| **CSV reports** | Share filenames and sorting choices through Android's share sheet. |
+
+## How it works
+
+1. **Add photos** or start with the samples. PicPick copies selected images into its private storage.
+2. **Review one photo at a time.** Keep a favorite, mark it as Trash, or Skip the decision.
+3. **Inspect and undo.** Open a photo to zoom in, or undo recent sorting choices.
+4. **Find your photos.** Search Gallery or browse Keep, Trash, and Skip folders.
+5. **Finish your session.** Revisit skipped photos, share a report, or manage imported copies in Settings.
+
+The first-run guide explains these controls and is available again under **Settings → How to use PicPick**.
+
+## Run locally
+
+### Requirements
+
+- JDK 17.
+- Android SDK Platform 35 and build tools.
+- An Android phone or emulator running API 26 or newer.
+
+Android Studio is optional if your JDK and Android SDK are already installed. You can edit and build the project from VS Code.
 
 ```sh
-./gradlew assembleDebug
-./gradlew installDebug
+git clone https://github.com/borhanrahimi/PicPick.git
+cd PicPick
 ```
 
-APK output: `app/build/outputs/apk/debug/app-debug.apk`.
-
-### In your browser
-
-A public demo link has not been configured in this repository yet.
-
-1. Build the APK with `./gradlew assembleDebug`.
-2. Upload it to your [Appetize](https://appetize.io/) account.
-3. Start a session to try the app in a browser.
-4. Copy the share URL and add it near the top of this README.
-
-See Appetize's [Android upload requirements](https://docs.appetize.io/platform/app-management/uploading-apps/android) and [sharing documentation](https://docs.appetize.io/platform/sharing-apps). Hosting account limits apply. The hosted device's photo picker sees that virtual device's media, rather than your computer's photo library; use the bundled samples or add media to the virtual device.
-
-### Suggested walkthrough
-
-1. Open Settings and leave **Include sample photos** enabled.
-2. Reset choices, then open Review.
-3. Keep a photo, mark another as Trash, and undo both decisions.
-4. Skip a photo. Finish the first pass, then tap **Review skipped photos**.
-5. Browse Gallery and Folders, then open a sorted photo fullscreen.
-6. Switch between light and dark appearance in Settings.
-7. Tap **Add photos** to choose personal images. Try importing the same image twice to see duplicate detection.
-8. Choose **Share sorting report** to export a CSV.
-9. Close and reopen the app to check the saved library and undo history.
-
-Add actual screenshots of Review, Folders, and Settings here after capturing them on a device. No simulated screenshots or placeholder demo links are included.
-
-## Development setup
-
-- JDK 17 for Android Gradle Plugin 8.8.1; app Java source compatibility is 11.
-- Android SDK Platform 35 and appropriate build tools.
-- Android 8.0 / API 26 or newer to run the app.
-
-Android Studio is optional when the SDK and JDK are already installed. Open this folder in VS Code and run Gradle commands in its terminal. Android Studio provides SDK/device setup and visual layout previews if you prefer it.
-
-Configure your SDK in an untracked `local.properties` file:
+Set your SDK location in an untracked `local.properties` file:
 
 ```properties
 sdk.dir=/absolute/path/to/Android/sdk
 ```
 
-On Windows, use `gradlew.bat` instead of `./gradlew`. See the [Android command-line build guide](https://developer.android.com/build/building-cmdline).
-
-## Design and structure
-
-A shared light/dark palette, reusable typography styles, Material cards, and four labeled navigation destinations keep the screens consistent. System-bar insets are handled centrally, and content can scroll on smaller displays.
-
-```text
-app/src/main/
-├── java/edu/utsa/cs3443/picpick/
-│   ├── BaseActivity.java        # Theme, navigation, insets, picker, export
-│   ├── HomeActivity.java        # Review, progress, and undo
-│   ├── PhotoGridActivity.java   # Shared Gallery/Keep/Trash/Skip behavior
-│   ├── FolderActivity.java      # Category cards and collection summary
-│   ├── SettingsActivity.java    # Appearance and library controls
-│   ├── FullscreenActivity.java
-│   ├── PhotoImportModel.java    # Background imports retained during rotation
-│   ├── PhotoImages.java         # Sampled image loading, cache, EXIF rotation
-│   ├── ImageAdapter.java
-│   └── model/
-│       ├── Photo.java
-│       ├── PhotoManager.java    # Library, classifications, undo, persistence
-│       └── Csv.java             # CSV escaping and formula protection
-├── assets/                     # Nine bundled sample images
-└── res/                        # Layouts, tokens, icons, styles, sharing rules
-```
-
-## Storage and behavior
-
-- Imports are app-private copies, up to **25 MB** and **100 megapixels** per image. Unsupported or oversized images are reported in the import result.
-- Identical file contents are deduplicated using SHA-256. The original image is never modified or deleted.
-- The library and last 100 sorting changes are saved locally. Resetting choices, changing sample visibility, or requeuing skipped photos clears undo history.
-- Hiding samples preserves their classifications. Reset affects visible photos; hidden sample decisions are preserved.
-- CSV reports contain visible photo labels and classifications. Fields are quoted, quotes are escaped, and leading spreadsheet formulas are neutralized.
-- Reports are shared through a FileProvider restricted to the report-cache directory. Photos are not exposed by that provider.
-- Android backup and device transfer of app data are disabled. Clearing app storage or uninstalling removes imported copies and saved decisions; keep your original photos elsewhere.
-
-The picker uses the [Android Photo Picker API](https://developer.android.com/training/data-storage/shared/photo-picker), and report sharing follows [FileProvider guidance](https://developer.android.com/reference/androidx/core/content/FileProvider).
-
-## Verification
+Build an APK:
 
 ```sh
-# Build, lint, and host-side CSV tests
-./gradlew assembleDebug lintDebug testDebugUnitTest
-
-# Compile device tests without a device
-./gradlew assembleDebugAndroidTest
-
-# Execute device tests on a connected emulator/device
-./gradlew connectedDebugAndroidTest
+./gradlew assembleDebug
 ```
 
-Device tests cover classification persistence, multi-step undo after reload, sample visibility, reset, CSV synchronization, import copying/deduplication, and review/reset UI behavior. They reset sample classifications and should run on a disposable test installation.
+Install on a running emulator or USB-connected Android phone:
 
-Building and compiling tests does not replace visual testing. Check import/share dialogs, small-screen layouts, dark mode, and large text on an Android device before releasing.
+```sh
+./gradlew installDebug
+```
 
-## Next improvements
+Open **PicPick** from the device's app list. The APK is generated at `app/build/outputs/apk/debug/app-debug.apk`.
 
-- Swipe gestures as an alternative to the labeled review buttons.
-- Search and filter larger libraries.
-- Selective removal of imported app copies, with clear confirmation.
-- Accessibility and visual testing across screen sizes.
-- CI builds, screenshots, and a downloadable APK release.
+On Windows, use `gradlew.bat` in place of `./gradlew`. If installation reports **No connected devices**, start an emulator or connect an Android phone with USB debugging enabled. Building the APK does not require a device.
 
-## Contributing and license
+### Browser preview
 
-Describe the problem or feature in an issue. For changes, include what changed and how it was verified.
+Upload the debug APK to your [Appetize](https://appetize.io/) account to run the native app in a browser and obtain a share link. A public demo URL is not configured in this repository. Hosting limits apply; see [Appetize's Android upload guide](https://docs.appetize.io/platform/app-management/uploading-apps/android).
 
-No license file is included yet. Add an explicit license before presenting this code as reusable open-source software.
+The hosted device sees its own media library. Start with PicPick's sample photos, or add media to that virtual device before testing import.
+
+## Privacy & storage
+
+- Photos and sorting choices stay in app-private storage. No account, server, network permission, or broad photo-library permission is required.
+- Import creates a copy; it does not edit or delete your original photo. Supported imports are limited to **25 MB** and **100 megapixels** per image.
+- Removing an imported copy requires confirmation and removes its PicPick classification/history. Sample photos can be hidden, but not individually removed.
+- Hiding samples preserves their saved choices. Reset affects visible photos. Reset, sample-visibility changes, and requeuing skipped photos clear undo history.
+- CSV reports include visible photo labels and classifications. Quoting and spreadsheet-formula protection are applied to filenames.
+- Android backup and device transfer of app data are disabled. Uninstalling or clearing app storage removes imported copies and saved choices; retain your originals elsewhere.
+
+## Built with
+
+Java, Android XML layouts, Material Components, AndroidX Activity Result APIs, SharedPreferences, and app-private file storage. Images load on background workers with sampling, EXIF orientation correction, and a memory cache.
+
+See [the development guide](docs/DEVELOPMENT.md) for architecture, test commands, and screenshot capture instructions.
+
+## Credits
+
+PicPick was built with the contributions of:
+
+| Contributor | Profile |
+|---|---|
+| **[Borhan Rahimi](https://www.linkedin.com/in/borhanrahimi/)** | [LinkedIn](https://www.linkedin.com/in/borhanrahimi/) |
+| **[Nadibur Rahman](https://www.linkedin.com/in/nadibur-rahman/)** | [LinkedIn](https://www.linkedin.com/in/nadibur-rahman/) |
+| **[Simon Karottakuttu](https://www.linkedin.com/in/simon-karottakuttu/)** | [LinkedIn](https://www.linkedin.com/in/simon-karottakuttu/) |
+| **[Levi Torres](https://www.linkedin.com/in/torres-levi/)** | [LinkedIn](https://www.linkedin.com/in/torres-levi/) |
+
+Thank you to everyone above for helping build PicPick. These credits and profile links are also available under **Settings → Built together**.
+
+## Contributing
+
+Open an issue describing the problem or proposed improvement. For code changes, include what changed and how you tested it. Useful next steps include larger-library performance, accessibility testing, and automated release builds.
+
+## License
+
+No license file has been added yet. Reuse permissions have not been specified.

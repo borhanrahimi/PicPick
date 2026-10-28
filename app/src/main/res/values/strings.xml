@@ -70,11 +70,10 @@
     <string name="export_error">Could not share the report. Please try again.</string>
     <string name="gallery_title">Your gallery</string>
     <string name="gallery_subtitle">A little less clutter, one photo at a time.</string>
-    <string name="gallery_empty">No photos here yet. Add photos or keep reviewing your collection.</string>
+    <string name="gallery_empty">No matching photos. Try a different search or filter, or add photos.</string>
     <string name="folders_title">Your collection</string>
     <string name="folders_subtitle">Every decision has a place.</string>
-    <string name="library_summary">%1$d photos in your library
-%2$d sorted · %3$d still to review</string>
+    <string name="library_summary">%1$d photos in your library\n%2$d sorted · %3$d still to review</string>
     <string name="keep_description">The moments that matter</string>
     <string name="trash_description">Marked, never deleted</string>
     <string name="skip_description">Come back when ready</string>
@@ -91,9 +90,37 @@
     <string name="import_hint">Select up to 30 images at a time, up to 25 MB each. PicPick stores a private copy so your originals stay untouched.</string>
     <string name="data_controls">DATA &amp; EXPORT</string>
     <string name="privacy_hint">Photos stay in this app on your device. Trash only marks a photo; it never deletes your originals. Reports include filenames and sorting choices. Imported copies are removed when app storage is cleared or the app is uninstalled.</string>
-    <string name="about_app">PicPick 1.1
-A calmer home for your favorite moments.</string>
+    <string name="about_app">PicPick 1.2\nA calmer home for your favorite moments.</string>
     <string name="back">Back</string>
     <string name="fullscreen_photo">Full photo preview</string>
     <string name="importing">Adding photos…</string>
+    <string name="credits_title">BUILT TOGETHER</string>
+    <string name="credits_description">PicPick was built with the contributions of:</string>
+    <string name="credit_borhan" translatable="false"><a href="https://www.linkedin.com/in/borhanrahimi/">Borhan Rahimi</a></string>
+    <string name="credit_nadibur" translatable="false"><a href="https://www.linkedin.com/in/nadibur-rahman/">Nadibur Rahman</a></string>
+    <string name="credit_simon" translatable="false"><a href="https://www.linkedin.com/in/simon-karottakuttu/">Simon Karottakuttu</a></string>
+    <string name="credit_levi" translatable="false"><a href="https://www.linkedin.com/in/torres-levi/">Levi Torres</a></string>
+    <string name="remove_photo_title">Remove this app copy?</string>
+    <string name="remove_photo_message">Remove “%1$s” from PicPick and its saved sorting history? Your original photo will stay untouched.</string>
+    <string name="remove_copy">Remove copy</string>
+    <string name="copy_removed">App copy removed. Your original is untouched.</string>
+    <string name="remove_failed">Could not remove this copy. Please try again.</string>
+    <string name="sample_cannot_remove">Sample photos cannot be removed. Hide them in Settings instead.</string>
+    <string name="zoom_hint">Pinch to zoom · Drag to pan · Double-tap to zoom or reset</string>
+    <string name="reset_zoom">Reset zoom</string>
+    <string name="swipe_hint">Swipe left to trash, right to keep. Tap a photo to zoom.</string>
+    <string name="welcome_title">Welcome to PicPick</string>
+    <string name="welcome_message">1. Add photos or start with the samples. Your originals stay untouched.\n\n2. Swipe right to Keep or left to Trash. Use Skip to decide later. The labeled buttons work too.\n\n3. Tap a photo to zoom in. Undo restores your recent choices.\n\n4. Browse Gallery and Folders, share a report, or adjust appearance in Settings. Long-press an imported photo to remove only its app copy.</string>
+    <string name="start_reviewing">Start reviewing</string>
+    <string name="show_walkthrough">How to use PicPick</string>
+    <string name="storage_title">STORAGE</string>
+    <string name="storage_summary">%1$d imported copies · %2$s on this device</string>
+    <string name="manage_copies">Manage imported copies</string>
+    <string name="storage_hint">Long-press an imported photo to remove its PicPick copy. Your phone’s original stays untouched.</string>
+    <string name="search_photos">Search photo names</string>
+    <string name="filter_all">All</string>
+    <string name="filter_source">Photo source</string>
+    <string-array name="photo_sources">
+        <item>All sources</item><item>Imported photos</item><item>Sample photos</item>
+    </string-array>
 </resources>

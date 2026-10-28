@@ -5,6 +5,28 @@
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/gallery_subtitle" style="@style/BodyText" android:layout_marginTop="4dp" />
         <com.google.android.material.button.MaterialButton android:id="@+id/btnImport" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/import_photos" style="@style/ActionButton" app:icon="@drawable/ic_add" android:layout_marginTop="12dp" />
     </LinearLayout>
+    <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp" android:hint="@string/search_photos" app:endIconMode="clear_text">
+        <com.google.android.material.textfield.TextInputEditText android:id="@+id/photoSearch" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:inputType="text" android:maxLines="1" android:imeOptions="actionDone" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <HorizontalScrollView android:id="@+id/statusFilterScroll" android:layout_width="match_parent" android:layout_height="wrap_content" android:scrollbars="none" android:paddingHorizontal="16dp">
+        <com.google.android.material.chip.ChipGroup android:id="@+id/statusFilters" android:layout_width="wrap_content" android:layout_height="wrap_content"
+            app:singleSelection="true" app:selectionRequired="true" app:singleLine="true">
+            <com.google.android.material.chip.Chip android:id="@+id/filterAll" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="@string/filter_all" android:checkable="true" style="@style/Widget.Material3.Chip.Filter" />
+            <com.google.android.material.chip.Chip android:id="@+id/filterReview" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="@string/nav_review" android:checkable="true" style="@style/Widget.Material3.Chip.Filter" />
+            <com.google.android.material.chip.Chip android:id="@+id/filterKeep" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="@string/keep_action" android:checkable="true" style="@style/Widget.Material3.Chip.Filter" />
+            <com.google.android.material.chip.Chip android:id="@+id/filterTrash" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="@string/trash_action" android:checkable="true" style="@style/Widget.Material3.Chip.Filter" />
+            <com.google.android.material.chip.Chip android:id="@+id/filterSkip" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="@string/skip_action" android:checkable="true" style="@style/Widget.Material3.Chip.Filter" />
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+    <Spinner android:id="@+id/sourceFilter" android:layout_width="match_parent" android:layout_height="48dp"
+        android:layout_marginHorizontal="16dp" android:contentDescription="@string/filter_source" android:prompt="@string/filter_source" />
     <TextView android:id="@+id/photoCount" android:layout_width="match_parent" android:layout_height="wrap_content" style="@style/SectionTitle" android:paddingHorizontal="20dp" android:paddingBottom="12dp" />
     <FrameLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
         <GridView android:id="@+id/gridGallery" android:layout_width="match_parent" android:layout_height="match_parent" android:numColumns="auto_fit" android:columnWidth="104dp" android:horizontalSpacing="8dp" android:verticalSpacing="8dp" android:padding="16dp" android:clipToPadding="false" android:stretchMode="columnWidth" />

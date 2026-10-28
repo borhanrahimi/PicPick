@@ -20,6 +20,11 @@ public class ImageAdapter extends BaseAdapter {
         image.setLayoutParams(new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, size));
         image.setScaleType(ImageView.ScaleType.CENTER_CROP);
         image.setBackgroundResource(R.drawable.bg_photo_card);
+        image.setOutlineProvider(new android.view.ViewOutlineProvider() {
+            @Override public void getOutline(View view, android.graphics.Outline outline) {
+                outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), 16 * context.getResources().getDisplayMetrics().density);
+            }
+        });
         image.setClipToOutline(true);
         Photo photo = getItem(position);
         image.setContentDescription(photo.getLabel());

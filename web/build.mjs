@@ -1,0 +1,12 @@
+import { cp, mkdir, rm, writeFile, stat } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+const root = path.dirname(fileURLToPath(import.meta.url));
+const output = path.join(root, 'dist');
+await rm(output, { recursive:true, force:true });
+await mkdir(output);
+for (const file of ['index.html','styles.css','app.js','model.js']) await cp(path.join(root,file),path.join(output,file));
+await cp(path.join(root,'assets'),path.join(output,'assets'),{recursive:true});
+await writeFile(path.join(output,'.nojekyll'),'');
+for (let index=1;index<=9;index++) await stat(path.join(output,`assets/sample-${String(index).padStart(2,'0')}.webp`));
+console.log('Static GitHub Pages site ready in web/dist/ (no runtime dependencies).');

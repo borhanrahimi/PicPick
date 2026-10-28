@@ -2,13 +2,23 @@
 
 ### Make room for the moments you love.
 
-PicPick is a native Android photo organizer that turns a crowded photo collection into a simple decision: **Keep, Trash, or Skip**. Import selected photos, review them at your own pace, and find your choices in organized folders.
+PicPick is a native Android app for organizing photos with three simple choices: **Keep, Trash, or Skip**. Import selected images, review one at a time, and browse your decisions in organized folders. Built with Java and Material 3, it includes swipe controls, multi-step undo, photo zoom, search, and local storage.
 
 **Your originals stay untouched.** PicPick works with private copies, and Trash marks a photo rather than deleting it from your phone.
 
 **Android 8.0+ · Java · Material 3 · Light & dark themes · No account required**
 
-[See the app](#screenshots) · [Explore features](#features) · [Run locally](#run-locally) · [Meet the team](#credits)
+**[▶ Try the Android app in your browser](https://appetize.io/app/b_qhlt77l5uzx7wzrknd4lwdoeve)** · [Screenshots](#screenshots) · [Features](#features) · [Setup](#run-locally) · [Team](#credits)
+
+## Try PicPick
+
+| Experience | Best for | Access |
+|---|---|---|
+| **Native Android demo** | Trying the Android app in a streamed virtual device | **[Launch on Appetize](https://appetize.io/app/b_qhlt77l5uzx7wzrknd4lwdoeve)** |
+| **Interactive web adaptation** | Exploring sorting, folders, and themes in your own browser | [Local preview and GitHub Pages setup](#interactive-browser-demo) |
+| **Android source & APK** | Reviewing the implementation or running it on an Android device | [Build and run](#run-locally) |
+
+For a quick tour, open the Android demo, keep one sample photo, skip another, try Undo, and explore Folders and Settings. Appetize usage limits depend on the hosting account; screenshots below remain available if a streaming session cannot start. The virtual device uses its own media library, so start with the bundled samples.
 
 ## Screenshots
 
@@ -89,11 +99,23 @@ Open **PicPick** from the device's app list. The APK is generated at `app/build/
 
 On Windows, use `gradlew.bat` in place of `./gradlew`. If installation reports **No connected devices**, start an emulator or connect an Android phone with USB debugging enabled. Building the APK does not require a device.
 
-### Browser preview
+## Interactive browser demo
 
-Upload the debug APK to your [Appetize](https://appetize.io/) account to run the native app in a browser and obtain a share link. A public demo URL is not configured in this repository. Hosting limits apply; see [Appetize's Android upload guide](https://docs.appetize.io/platform/app-management/uploading-apps/android).
+The repository now includes a working browser adaptation in [`web/`](web/README.md). Visitors can sort the samples, undo choices, explore folders, search/filter photos, change themes, inspect photos, and download a report without installing Android software.
 
-The hosted device sees its own media library. Start with PicPick's sample photos, or add media to that virtual device before testing import.
+![PicPick interactive web adaptation showing review, sorting actions, and collection progress](docs/screenshots/web-demo.png)
+
+Preview it locally:
+
+```sh
+npm --prefix web start
+```
+
+Open **http://127.0.0.1:4173**. Node.js is needed only for the local preview and development tooling.
+
+**Publishing target:** [borhanrahimi.github.io/PicPick](https://borhanrahimi.github.io/PicPick/). This address becomes the recruiter demo after the included GitHub Pages workflow is pushed and enabled. See the [publishing steps](web/README.md#publish-on-github-pages).
+
+The web demo runs in the visitor’s browser, with no streamed-emulator session timer. It is clearly labeled as a web adaptation; the Java Android app remains the main project. Browser sample choices save locally, while personal photo imports remain in memory only until reload. Static-hosting quotas still apply.
 
 ## Privacy & storage
 
@@ -112,16 +134,34 @@ See [the development guide](docs/DEVELOPMENT.md) for architecture, test commands
 
 ## Credits
 
-PicPick was built with the contributions of:
+PicPick was built with the contributions of all four team members:
 
-| Contributor | Profile |
-|---|---|
-| **[Borhan Rahimi](https://www.linkedin.com/in/borhanrahimi/)** | [LinkedIn](https://www.linkedin.com/in/borhanrahimi/) |
-| **[Nadibur Rahman](https://www.linkedin.com/in/nadibur-rahman/)** | [LinkedIn](https://www.linkedin.com/in/nadibur-rahman/) |
-| **[Simon Karottakuttu](https://www.linkedin.com/in/simon-karottakuttu/)** | [LinkedIn](https://www.linkedin.com/in/simon-karottakuttu/) |
-| **[Levi Torres](https://www.linkedin.com/in/torres-levi/)** | [LinkedIn](https://www.linkedin.com/in/torres-levi/) |
+<table>
+  <tr>
+    <td align="center" width="25%">
+      <a href="https://www.linkedin.com/in/borhanrahimi/"><img src="docs/team/borhan-rahimi.png" width="120" height="120" alt="Borhan Rahimi"></a><br>
+      <strong><a href="https://www.linkedin.com/in/borhanrahimi/">Borhan Rahimi</a></strong><br>
+      <a href="https://www.linkedin.com/in/borhanrahimi/">LinkedIn</a>
+    </td>
+    <td align="center" width="25%">
+      <a href="https://www.linkedin.com/in/nadibur-rahman/"><img src="docs/team/nadibur-rahman.svg" width="120" height="120" alt="NR initials placeholder; Nadibur Rahman portrait pending"></a><br>
+      <strong><a href="https://www.linkedin.com/in/nadibur-rahman/">Nadibur Rahman</a></strong><br>
+      <a href="https://www.linkedin.com/in/nadibur-rahman/">LinkedIn</a>
+    </td>
+    <td align="center" width="25%">
+      <a href="https://www.linkedin.com/in/simon-karottakuttu/"><img src="docs/team/simon-karottakuttu.svg" width="120" height="120" alt="SK initials placeholder; Simon Karottakuttu portrait pending"></a><br>
+      <strong><a href="https://www.linkedin.com/in/simon-karottakuttu/">Simon Karottakuttu</a></strong><br>
+      <a href="https://www.linkedin.com/in/simon-karottakuttu/">LinkedIn</a>
+    </td>
+    <td align="center" width="25%">
+      <a href="https://www.linkedin.com/in/torres-levi/"><img src="docs/team/levi-torres.svg" width="120" height="120" alt="LT initials placeholder; Levi Torres portrait pending"></a><br>
+      <strong><a href="https://www.linkedin.com/in/torres-levi/">Levi Torres</a></strong><br>
+      <a href="https://www.linkedin.com/in/torres-levi/">LinkedIn</a>
+    </td>
+  </tr>
+</table>
 
-Thank you to everyone above for helping build PicPick. These credits and profile links are also available under **Settings → Built together**.
+Portraits for Nadibur Rahman, Simon Karottakuttu, and Levi Torres are pending; their initials are clearly labeled placeholders. Contributor names and profile links are also available under **Settings → Built together**.
 
 ## Contributing
 

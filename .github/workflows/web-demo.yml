@@ -1,0 +1,61 @@
+name: Test and deploy PicPick web demo
+
+on:
+  push:
+    branches: [main]
+    paths: ['web/**', '.github/workflows/web-demo.yml']
+  pull_request:
+    paths: ['web/**', '.github/workflows/web-demo.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: picpick-pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - name: Check syntax and library behavior
+        run: npm run check
+      - name: Install test browser
+        run: npx playwright install --with-deps chromium
+      - name: Test desktop and mobile demo
+        run: npm run test:browser
+      - name: Package static files only
+        run: npm run build
+      - name: Upload GitHub Pages artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: web/dist
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: test-and-build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Deploy demo
+        id: deployment
+        uses: actions/deploy-pages@v4

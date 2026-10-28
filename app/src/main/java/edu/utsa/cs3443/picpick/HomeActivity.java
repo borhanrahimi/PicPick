@@ -1,149 +1,69 @@
 package edu.utsa.cs3443.picpick;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
-
+import android.view.View;
+import android.widget.*;
 import edu.utsa.cs3443.picpick.model.Photo;
 import edu.utsa.cs3443.picpick.model.PhotoManager;
+import java.util.List;
 
-public class HomeActivity extends AppCompatActivity {
-
-    private List<Photo> unassignedPhotos;
-    private int currentIndex = 0;
-    private ImageView imageViewMain;
-
-    private Photo lastUndoPhoto = null;
-    private Photo.Status lastUndoStatus = null;
-    private boolean revisitingSkipped = false; // Flag to track skip round
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        PhotoManager.loadPhotos(this);
+public class HomeActivity extends BaseActivity {
+    private String currentPath;
+    @Override protected void onCreate(Bundle state) {
+        super.onCreate(state);
         setContentView(R.layout.activity_home);
-
-        unassignedPhotos = PhotoManager.getUnassignedPhotos();
-        imageViewMain = findViewById(R.id.imageViewMain);
-
-        ImageButton btnUndo = findViewById(R.id.btnUndo);
-        btnUndo.setOnClickListener(v -> performUndo());
-
-        String selectedPath = getIntent().getStringExtra("imagePath");
-        if (selectedPath != null) {
-            for (int i = 0; i < unassignedPhotos.size(); i++) {
-                if (unassignedPhotos.get(i).getFilePath().equals(selectedPath)) {
-                    currentIndex = i;
-                    break;
-                }
-            }
-        }
-
-        showCurrentPhoto();
-
-        findViewById(R.id.btnKeep).setOnClickListener(v -> handleChoice(Photo.Status.KEEP));
-        findViewById(R.id.btnTrash).setOnClickListener(v -> handleChoice(Photo.Status.TRASH));
-        findViewById(R.id.btnSkip).setOnClickListener(v -> handleChoice(Photo.Status.SKIP));
-
-        ImageButton btnGallery = findViewById(R.id.btnGallery);
-        ImageButton btnHome = findViewById(R.id.btnHome);
-        ImageButton btnFolder = findViewById(R.id.btnFolder);
-
-        btnHome.setImageResource(R.drawable.ic_home_dark);
-
-        btnGallery.setOnClickListener(v -> startActivity(new Intent(this, GalleryActivity.class)));
-        btnFolder.setOnClickListener(v -> startActivity(new Intent(this, FolderActivity.class)));
+        currentPath = state == null ? getIntent().getStringExtra("imagePath") : state.getString("currentPath");
+        findViewById(R.id.btnKeep).setOnClickListener(v -> choose(Photo.Status.KEEP));
+        findViewById(R.id.btnTrash).setOnClickListener(v -> choose(Photo.Status.TRASH));
+        findViewById(R.id.btnSkip).setOnClickListener(v -> choose(Photo.Status.SKIP));
+        findViewById(R.id.btnUndo).setOnClickListener(v -> {
+            currentPath = PhotoManager.undo(this); render();
+        });
+        findViewById(R.id.btnReviewSkipped).setOnClickListener(v -> {
+            PhotoManager.moveSkippedToUnassigned(this); render();
+        });
     }
-
-    private void handleChoice(Photo.Status newStatus) {
-        if (currentIndex < unassignedPhotos.size()) {
-            Photo photo = unassignedPhotos.get(currentIndex);
-            lastUndoPhoto = photo;
-            lastUndoStatus = photo.getStatus();
-
-            PhotoManager.setPhotoStatus(photo, newStatus, this);
-
-            // Reload list and adjust index
-            unassignedPhotos = PhotoManager.getUnassignedPhotos();
-            if (unassignedPhotos.isEmpty()) {
-                List<Photo> skipped = PhotoManager.getPhotosByStatus(Photo.Status.SKIP);
-                if (!skipped.isEmpty()) {
-                    PhotoManager.moveSkippedToUnassigned(this);
-                    unassignedPhotos = PhotoManager.getUnassignedPhotos();
-                    currentIndex = 0;
-                    Toast.makeText(this, "Reviewing skipped photos again", Toast.LENGTH_SHORT).show();
-                } else {
-                    showCurrentPhoto(); // still empty
-                }
-            } else if (currentIndex >= unassignedPhotos.size()) {
-                currentIndex = Math.max(0, unassignedPhotos.size() - 1);
-            }
-
-            showCurrentPhoto();
-        }
+    @Override protected void onNewIntent(android.content.Intent intent) {
+        super.onNewIntent(intent); setIntent(intent);
+        if (intent.hasExtra("imagePath")) currentPath = intent.getStringExtra("imagePath");
+        render();
     }
-
-    private void performUndo() {
-        if (lastUndoPhoto != null && lastUndoStatus != null) {
-            PhotoManager.setPhotoStatus(lastUndoPhoto, lastUndoStatus, this);
-            unassignedPhotos = PhotoManager.getUnassignedPhotos();
-
-            boolean found = false;
-            for (int i = 0; i < unassignedPhotos.size(); i++) {
-                if (unassignedPhotos.get(i).getFilePath().equals(lastUndoPhoto.getFilePath())) {
-                    currentIndex = i;
-                    found = true;
-                    break;
-                }
-            }
-
-            // 🔁 If photo isn’t found in unassigned, check all photos
-            if (!found) {
-                List<Photo> allPhotos = PhotoManager.getAllPhotos();
-                for (int i = 0; i < allPhotos.size(); i++) {
-                    if (allPhotos.get(i).getFilePath().equals(lastUndoPhoto.getFilePath())) {
-                        if (lastUndoStatus == Photo.Status.UNASSIGNED) {
-                            unassignedPhotos = PhotoManager.getUnassignedPhotos();
-                            currentIndex = unassignedPhotos.indexOf(lastUndoPhoto);
-                        }
-                        found = true;
-                        break;
-                    }
-                }
-            }
-
-            showCurrentPhoto();
-            Toast.makeText(this, "Undo successful", Toast.LENGTH_SHORT).show();
-
-            lastUndoPhoto = null;
-            lastUndoStatus = null;
-        } else {
-            Toast.makeText(this, "Nothing to undo", Toast.LENGTH_SHORT).show();
-        }
+    @Override protected void onResume() { super.onResume(); render(); }
+    @Override protected void onLibraryChanged() { render(); }
+    @Override protected void onSaveInstanceState(Bundle state) {
+        super.onSaveInstanceState(state); state.putString("currentPath", currentPath);
     }
-
-    private void showCurrentPhoto() {
-        if (currentIndex >= unassignedPhotos.size()) {
-            imageViewMain.setImageResource(R.drawable.ic_launcher_foreground);
-            return;
+    private void choose(Photo.Status status) {
+        Photo photo = PhotoManager.getPhotoByPath(currentPath);
+        if (photo == null || photo.getStatus() != Photo.Status.UNASSIGNED) return;
+        PhotoManager.setPhotoStatus(photo, status, this);
+        currentPath = null; render();
+    }
+    private void render() {
+        List<Photo> queue = PhotoManager.getUnassignedPhotos();
+        int total = PhotoManager.getAllPhotos().size();
+        int skipped = PhotoManager.getPhotosByStatus(Photo.Status.SKIP).size();
+        int sorted = total - queue.size() - skipped;
+        ProgressBar progress = findViewById(R.id.reviewProgressBar);
+        progress.setMax(Math.max(1, total)); progress.setProgress(sorted);
+        ((TextView) findViewById(R.id.reviewProgress)).setText(getString(R.string.review_progress, sorted, total, skipped));
+        Photo current = PhotoManager.getPhotoByPath(currentPath);
+        if (current == null || current.getStatus() != Photo.Status.UNASSIGNED) current = queue.isEmpty() ? null : queue.get(0);
+        currentPath = current == null ? null : current.getFilePath();
+        boolean hasPhoto = current != null;
+        ImageView image = findViewById(R.id.imageViewMain);
+        image.setVisibility(hasPhoto ? View.VISIBLE : View.GONE);
+        findViewById(R.id.reviewEmpty).setVisibility(hasPhoto ? View.GONE : View.VISIBLE);
+        ((TextView) findViewById(R.id.reviewEmpty)).setText(total == 0 ? R.string.no_photos : skipped > 0 ? R.string.review_paused : R.string.review_complete);
+        ((TextView) findViewById(R.id.currentPhotoLabel)).setText(hasPhoto ? current.getLabel() : "");
+        findViewById(R.id.btnReviewSkipped).setVisibility(!hasPhoto && skipped > 0 ? View.VISIBLE : View.GONE);
+        for (int id : new int[]{R.id.btnKeep, R.id.btnTrash, R.id.btnSkip}) {
+            findViewById(id).setEnabled(hasPhoto); findViewById(id).setAlpha(hasPhoto ? 1f : .35f);
         }
-
-        Photo current = unassignedPhotos.get(currentIndex);
-        try {
-            InputStream is = getAssets().open(current.getFilePath());
-            imageViewMain.setImageBitmap(android.graphics.BitmapFactory.decodeStream(is));
-            is.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        boolean undo = PhotoManager.canUndo();
+        findViewById(R.id.btnUndo).setEnabled(undo); findViewById(R.id.btnUndo).setAlpha(undo ? 1f : .35f);
+        if (!hasPhoto) { image.setTag(null); image.setImageDrawable(null); return; }
+        image.setContentDescription(getString(R.string.review_photo, current.getLabel()));
+        PhotoImages.load(image, currentPath, 1600);
     }
 }
-

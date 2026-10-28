@@ -10,8 +10,8 @@ android {
         applicationId = "edu.utsa.cs3443.picpick"
         minSdk = 26
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -36,6 +36,7 @@ android {
 
 dependencies {
 
+    implementation("androidx.exifinterface:exifinterface:1.3.7")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)

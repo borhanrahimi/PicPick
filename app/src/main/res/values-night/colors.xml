@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <color name="canvas">#14131E</color>
+    <color name="surface">#201F2E</color>
+    <color name="ink">#F3F0FF</color>
+    <color name="muted">#BCB7D0</color>
+    <color name="brand">#BDB2FF</color>
+    <color name="brand_soft">#36304E</color>
+    <color name="outline">#3B374D</color>
+</resources>
